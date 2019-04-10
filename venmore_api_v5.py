@@ -45,6 +45,13 @@ def new_account():
             result = 0
         return(result)
 
+#Generates a random user-agent:
+def randUA(): 
+    with open('user-agents.txt', 'r') as uaFile:
+        allUserAgents = uaFile.read().splitlines()
+        userAgent = choice(allUserAgents)
+    return(userAgent)
+
 #Create new account, get token
 api_token = new_account()
 while api_token == 0:
@@ -59,7 +66,7 @@ next_page = feed_url
 feed_headers = { 
         'DNT' :'1',
         'Cache-Control' :'max-age=0',
-        'User-Agent' :'Mozilla/5.0 (iPhone; CPU OS 11_3 like Mac OS X) AppleWebKit/602.1.50 (KHTML, like Gecko) Mobile/14A346 Safari Line/6.6.1'
+        'User-Agent' :randUA
 }
 
 #reeead tha feeeed:

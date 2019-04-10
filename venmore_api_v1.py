@@ -2,6 +2,8 @@
 
 import requests,json,time,random,os
 from urllib import parse
+from random import choice
+
 
 before_id = 2605676841557557260 #most recent transaction ID to work backwards (in time) from 
 after_id = 2605676841557500000 #final transaction ID (stopping point)
@@ -45,6 +47,13 @@ def new_account():
             result = 0
         return(result)
 
+#Generates a random user-agent:
+def randUA(): 
+    with open('user-agents.txt', 'r') as uaFile:
+        allUserAgents = uaFile.read().splitlines()
+        userAgent = choice(allUserAgents)
+    return(userAgent)
+
 #Create new account, get token
 api_token = new_account()
 while api_token == 0:
@@ -53,13 +62,11 @@ while api_token == 0:
 feed_url = 'https://api.venmo.com/v1/stories'
 next_page = feed_url
 
-
 #these headers are not necessary, but. . .JIC
-#If you want to bypass bot detection, randomize the order and contents of these:
 feed_headers = { 
         'DNT' :'1',
         'Cache-Control' :'max-age=0',
-        'User-Agent' :'Mozilla/5.0 (iPhone; CPU OS 11_3 like Mac OS X) AppleWebKit/602.1.50 (KHTML, like Gecko) Mobile/14A346 Safari Line/6.6.1'
+        'User-Agent' :randUA
 }
 
 #reeead tha feeeed:
@@ -80,7 +87,7 @@ while before_id >= after_id:
         feed_data = results['data']
         f= open("thenmo_results/{}".format(before_id),"w+") 
         json.dump(results, f)
-        f.close()
+        f.close()  
         before_id = parse.parse_qs(parse.urlparse(next_page).query)['before_id'][0]
         print(feed_data)
         print(before_id)
