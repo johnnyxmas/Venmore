@@ -73,7 +73,8 @@ feed_headers = {
 while until_epoch <= since_epoch:
     feed_params = (
 	('since', since_epoch),
-	('until', until_epoch)
+	('until', until_epoch),
+    ('include', 'payment,charge,transfer')
     )
 
     print("Trying to get feed. . .")
