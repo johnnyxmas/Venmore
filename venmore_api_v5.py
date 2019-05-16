@@ -1,6 +1,6 @@
 #!/bin/python3
 
-import requests,json,time,random,os
+import requests,json,time,string,random,os
 from urllib import parse
 
 #Get your initial epoch values from https://venmo.com/api/v5/public to avoid requesting too wide of a range
@@ -17,7 +17,7 @@ def new_account():
         global session
         tel_interchange = random.randint(100,999)
         tel_line = random.randint(1000,9999)
-        username = random.randint(1000000,99999999999999)
+        username = ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.ascii_lowercase) for _ in range(20))
         password = random.randint(10000000000,99999999999999)
         username = f'{username}@email.com'
         client_id = 10 #unsure what this does, but it's necessary. 1, 10 and 2899 are valid values. New account seems to always get 10. 
@@ -49,7 +49,7 @@ def new_account():
 def randUA(): 
     with open('user-agents.txt', 'r') as uaFile:
         allUserAgents = uaFile.read().splitlines()
-        userAgent = choice(allUserAgents)
+        userAgent = random.choice(allUserAgents)
     return(userAgent)
 
 #Create new account, get token
