@@ -5,7 +5,7 @@ from urllib import parse
 
 #Get your initial epoch values from https://venmo.com/api/v5/public to avoid requesting too wide of a range
 since_epoch = 1541392845 #Most recent epoch time to work backwards from 
-until_epoch = 1541392843 #Epoch stopping point (furthest time in the past)
+until_epoch = 1531392843 #Epoch stopping point (furthest time in the past)
 
 if not os.path.exists("thenmo_results"):
     os.makedirs("thenmo_results")
@@ -85,12 +85,12 @@ while until_epoch <= since_epoch:
         results = json.loads(feed.content)
         next_page = results['paging']['next']
         feed_data = results['data']
-        f= open("thenmo_results/{}".format(before_id),"w+") 
+        f= open("thenmo_results/{}".format(since_epoch),"w+") 
         json.dump(results, f)
         f.close()
-        before_id = parse.parse_qs(parse.urlparse(next_page).query)['since'][0]
+        since_epoch = parse.parse_qs(parse.urlparse(next_page).query)['since'][0]
         print(feed_data)
-        print(before_id)
+        print(since_epoch)
         time.sleep(3)
     else:
         print("Too Many Requests")
