@@ -8,8 +8,8 @@ before_id = 2605676841557557260 #most recent transaction ID to work backwards (i
 after_id = 2605676841557500000 #final transaction ID (stopping point)
 results_limit = 50
 
-if not os.path.exists("thenmo_results"):
-    os.makedirs("thenmo_results")
+if not os.path.exists("venmore_results"):
+    os.makedirs("venmore_results")
 
 session = requests.Session()
 
@@ -84,7 +84,7 @@ while before_id >= after_id:
         results = json.loads(feed.content)
         next_page = results['pagination']['next']
         feed_data = results['data']
-        f= open("thenmo_results/{}".format(before_id),"w+") 
+        f= open("venmore_results/{}".format(before_id),"w+") 
         json.dump(results, f)
         f.close()  
         before_id = parse.parse_qs(parse.urlparse(next_page).query)['before_id'][0]

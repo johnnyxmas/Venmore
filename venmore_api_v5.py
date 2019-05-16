@@ -7,8 +7,8 @@ from urllib import parse
 since_epoch = 1541392845 #Most recent epoch time to work backwards from 
 until_epoch = 1531392843 #Epoch stopping point (furthest time in the past)
 
-if not os.path.exists("thenmo_results"):
-    os.makedirs("thenmo_results")
+if not os.path.exists("venmore_results"):
+    os.makedirs("venmore_results")
 
 session = requests.Session()
 
@@ -86,7 +86,7 @@ while until_epoch <= since_epoch:
         results = json.loads(feed.content)
         next_page = results['paging']['next']
         feed_data = results['data']
-        f= open("thenmo_results/{}".format(since_epoch),"w+") 
+        f= open("venmore_results/{}".format(since_epoch),"w+") 
         json.dump(results, f)
         f.close()
         since_epoch = parse.parse_qs(parse.urlparse(next_page).query)['since'][0]
