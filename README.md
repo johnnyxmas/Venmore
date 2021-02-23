@@ -9,6 +9,6 @@ These scripts leverage one-time use account creation to generate API access toke
 
 API v1 seems to be the most stable, whereas v5 seems to lock out extremely fast, regardless of token. 
 
-See Johnny Xmas' talk "Shut Up and Take My Money: Scraping the Venmo Public Feed" from Hackfest Canada 10 (2018) for detailed info. 
+See Johnny Xmas' talk ["Shut Up and Take My Information: Scraping the Venmo Public Feed"](https://www.youtube.com/watch?v=jvrFXe2yONM) from Hackfest Canada 10 (2018) for detailed info. 
 
 Slide deck from the above talk located in the [Talk_Decks](https://github.com/johnnyxmas/Talk_Decks/tree/master/2018/Scraping%20the%20Venmo%20Public%20Feed) repository 
